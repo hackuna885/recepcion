@@ -26,7 +26,7 @@ $_POST = json_decode(file_get_contents("php://input"), true);
     //Generamos el QR dentro de la Ruta 'img/qr/'
 
     $con = new SQLite3("../data/data.db");
-    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '815' ");
+    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '10642' ");
     while ($resul = $cs -> fetchArray()) {
         $claveUno = $resul['claveUno'];
         $nomCompleto = $resul['nomCompleto'];
@@ -106,9 +106,7 @@ $_POST = json_decode(file_get_contents("php://input"), true);
                     <p>
                     <h3>Se cordialmente invitado al Festejo de Fin de Año de la UTFV, puedes descargar tu invitación desde el siguiente enlace:</h3>
                     <br>
-                    Para ingresar a las salas solo ingresa en el siguiente enlace:
-                    <br>
-                    <a href="'.$nomPdf.'">'.$nomPdf.'</a>
+                    Solo descarga el archivo PDF con el nombre “'.$nomPdf.'” adjunto dentro del correo.
                     <br>
                     <br>
                     ';
