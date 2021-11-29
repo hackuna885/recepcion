@@ -10,14 +10,27 @@ include('phpqrcode.php');
 require_once 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 
+// Correo
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpMailer/Exception.php';
+require 'phpMailer/PHPMailer.php';
+require 'phpMailer/SMTP.php';
+
+// Codifica el formato json
+$_POST = json_decode(file_get_contents("php://input"), true);
+
 
     //Generamos el QR dentro de la Ruta 'img/qr/'
 
     $con = new SQLite3("../data/data.db");
-    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '817' ");
+    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '815' ");
     while ($resul = $cs -> fetchArray()) {
         $claveUno = $resul['claveUno'];
         $nomCompleto = $resul['nomCompleto'];
+        $correoInt = $resul['correoInt'];
 
         $md5ClaveUno = md5($claveUno);
         $dirTemp = '../../img/qr/';
@@ -51,6 +64,65 @@ use Dompdf\Dompdf;
             //Guarda PDF dentro de la ruta
             $output = $dompdf->output();
             file_put_contents($archivoPdf, $output);
+
+
+			// ##################################
+			// Inicia enviar correo
+			// ##################################
+
+            if(file_exists($archivoPdf)){
+
+                $mail = new PHPMailer(true);
+    
+                    //Server settings
+                    // $mail->SMTPDebug = 2;    //Sirve como guía para detectar errores de envió
+                    $mail->CharSet = 'UTF-8';
+            
+                    $mail->isSMTP();
+            
+                    $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                    $mail->Username   = 'atencioncongreso8@utfv.edu.mx';                     // SMTP username
+                    $mail->Password   = '@123Atencion2021';                               // SMTP password
+                    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port       = 587;                                    // TCP port to connect to
+            
+                    //PARA PHP 5.6 Y POSTERIOR
+                    $mail->SMTPOptions = array( 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true ) );
+            
+                    //Recipients
+                    $mail->setFrom('atencioncongreso8@utfv.edu.mx');
+                    $mail->addAddress($correoInt);     //Correo de Salida
+                    // $mail->addBCC('oliver.velazquez@corsec.com.mx');
+                    $mail->addAttachment($archivoPdf);  //Archivo Adjunto
+            
+                    // Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    // $mail->msgHTML(file_get_contents('ejemplo.html'), __DIR__);     //Se envio archivo en HTML pero $mail->Body debe estar desactivado
+                    $mail->Subject = 'Invitación al Festejo de Fin de Año de la UTFV';
+                    $mail->Body    = '
+                    <h1>¡Hola,'.$nomCompleto.'!</h1>
+                    <br>
+                    <p>
+                    <h3>Se cordialmente invitado al Festejo de Fin de Año de la UTFV, puedes descargar tu invitación desde el siguiente enlace:</h3>
+                    <br>
+                    Para ingresar a las salas solo ingresa en el siguiente enlace:
+                    <br>
+                    <a href="'.$nomPdf.'">'.$nomPdf.'</a>
+                    <br>
+                    <br>
+                    ';
+            
+                    $mail->send();
+    
+    
+                    echo json_encode('correcto');			
+            }
+            
+
+            // ##################################
+            // Termina enviar correo
+            // ##################################
 
         }else{
             echo 'No es posible Generar PDF, falta qrchivo QR';
