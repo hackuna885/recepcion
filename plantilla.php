@@ -10,7 +10,7 @@ $nomCompleto = !empty($nomCompleto) ? $nomCompleto : '';
 
 <html>
     <head>
-        <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div class="hoja">
@@ -20,7 +20,7 @@ $nomCompleto = !empty($nomCompleto) ? $nomCompleto : '';
             <div class="nomInvitado">
                 <h2>PARA: <?php echo $nomCompleto;?></h2>
             </div>
-            <img src="../../img/invita.jpg">
+            <img src="img/invita.jpg">
         </div>
     </body>
 </html>

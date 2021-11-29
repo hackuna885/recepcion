@@ -42,7 +42,7 @@ use Dompdf\Dompdf;
             include "plantilla.php";
             $html = ob_get_clean();
             $dompdf->loadHtml($html);
-            $dompdf->setPaper('letter', 'portrait');
+            $dompdf->setPaper('letter', 'landscape');
             $dompdf->render();
     
             //Pregunta donde guardar el PDF
