@@ -1,0 +1,13 @@
+html {
+  height: 100%; }
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%; }
+
+.fndoCard {
+  background-image: url("../img/fondo.svg"); }
+
+/*# sourceMappingURL=buscador.css.map */

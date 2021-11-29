@@ -5,13 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/buscador.css">
     <title>Verificación de Empleado</title>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-5 mx-auto">
+            <div class="col-md-4 mx-auto">
                 <div class="text-center my-3">
+                    <div class="card p-3 shadow fndoCard">
+                        <div class="card-body">
+                            <img src="../img/LogoUTFV.svg" class="my-3" style="width: 100px; height: 100px; border-radius: 50%;">
+                            <br>
 
 
 <?php
@@ -28,6 +33,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
         $claveUno = $resul['claveUno'];
         $md5ClaveUno = $resul['md5ClaveUno'];
         $nomCompleto = $resul['nomCompleto'];
+        $depto = $resul['depto'];
+        $puesto = $resul['puesto'];
     };
 
     if (isset($id_data)) {
@@ -45,10 +52,18 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
             <img src="'.$imgPersonal.'" class="img-fluid rounded" style="width: 150px;">
             </div>
             <p>
-                <b>Núm. Empleado: </b>'.$claveUno.'
+                <div class="p-2 rounded" style="text-align: left; background-color: rgba(186, 186, 186, 0.5);">
+
+                    <b>Núm. Empleado: </b><i>'.$claveUno.'</i>
+                    <br>
+                    <b>Nombre: </b><i>'.$nomCompleto.'</i>
+                    <br>
+                    <b>Area: </b><i>'.$depto.'</i>
+                    <br>
+                    <b>Cargo: </b><i>'.$puesto.'</i>
+                </div>
                 <br>
-                <b>Nombre: </b>'.$nomCompleto.'
-                <br>
+                <button class="btn btn-success form-control my-4"><h3>Registro</h3></bustton>
             </p>
         ';
     }else{
@@ -66,6 +81,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
 
 
                 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
