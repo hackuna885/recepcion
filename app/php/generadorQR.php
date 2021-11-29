@@ -6,6 +6,7 @@ date_default_timezone_set('America/Mexico_City');
 // Libreria phpqrcode
 include('phpqrcode.php');
 
+//Libreria de dompdf
 require_once 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 
@@ -25,7 +26,7 @@ use Dompdf\Dompdf;
         $nomPdf = $md5ClaveUno.'.pdf';
         $archivoQr = $dirTemp.$nomQr;
         $archivoPdf = $dirPdf.$nomPdf;
-        $url = 'https://utfv.net/recepcion/buscador/?id='.$md5ClaveUno;
+        $url = 'https://utfv.net/recepcion/buscador/empleado.app?id='.$md5ClaveUno;
         $calida = 'h';
         $tamano = 10;
         $margen = 1;
