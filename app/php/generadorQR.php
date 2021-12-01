@@ -26,7 +26,7 @@ $_POST = json_decode(file_get_contents("php://input"), true);
     //Generamos el QR dentro de la Ruta 'img/qr/'
 
     $con = new SQLite3("../data/data.db");
-    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '10642' ");
+    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '817' ");
     while ($resul = $cs -> fetchArray()) {
         $claveUno = $resul['claveUno'];
         $nomCompleto = $resul['nomCompleto'];
