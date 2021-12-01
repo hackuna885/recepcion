@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="row" id="app">
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-5 mx-auto">
                 <div class="text-center my-3">
                     <div class="card p-3 shadow fndoCard">
                         <form @submit.prevent="alta">
@@ -29,6 +29,10 @@ header("Content-Type: text/html; Charset=UTF-8");
 date_default_timezone_set('America/Mexico_City');
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
+
+$fechaCap = date('d-m-Y');
+$horaCap = date('g:i:s a');
+$fechaHoraReg = $fechaCap . ' ' . $horaCap;
 
     $con = new SQLite3("../data/data.db");
     $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE md5ClaveUno = '$id'");
@@ -101,38 +105,49 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
         var app = new Vue({
             el: '#app',
             data: {
-                datos: '',
+                datos: [],
                 notificaEstado: '',
                 msgAlert: '',
                 nEmpleado: '<?php echo $md5ClaveUno;?>'
             },
             computed: {
-                validaAcceso() {
-                    this.notificaEstado = 'small alert alert-danger text-danger'
-                    this.msgAlert = 'Usuario sin registrar'
-                    return this.msgAlert
-                }
             },
             methods: {
                 alta () {
                     axios.post('../verifica/alta.app', {
-                        opcion: 1,
+                        opcion: 2,
                         nEmpleado: this.nEmpleado              
                     })
                     .then(response => {
                         if (response.data === 'correcto') {
                             Swal.fire({
                                 icon: 'success',
-                                title: '¡Usuario Activado!',
-                                showConfirmButton: false
+                                title: '¡Invitado Registrado!',
+                                showConfirmButton: true
                             })
+                            this.datos = '<div class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">Invitado registrado a las: <span style="font-size: .7em;"><?php echo $fechaHoraReg;?></span></div>'; 
                         }else{
                             this.datos = response.data
                             // console.log(response.data)
                         }
                     })
                 },
+
+                listaDatos () {
+                    axios.post('../verifica/alta.app', {
+                        opcion: 1
+                    })
+                    .then(response => {
+                        this.datos = response.data
+                        // console.log(response.data)
+
+                    })
+                },
+            },
+            created () {
+                this.listaDatos()
             }
+
         })
     </script>
 </body>
