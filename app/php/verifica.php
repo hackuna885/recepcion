@@ -21,7 +21,7 @@ $con = new SQLite3("../data/data.db");
 switch ($opcion) {
 	//Mostrar Lista
 	case 1:
-		$cs = $con -> query("SELECT * FROM empleados WHERE md5ClaveUno = '31839b036f63806cba3f47b93af8ccb5'");
+		$cs = $con -> query("SELECT * FROM empleados WHERE md5ClaveUno = '$nEmpleado'");
 		while ($resul = $cs -> fetchArray()) {
 				$claveUno = $resul['claveUno'];
 				$asistencia = $resul['asistencia'];
@@ -32,7 +32,7 @@ switch ($opcion) {
 
 				echo json_encode('
 				<div class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">
-					Invitado registrado a las: <span style="font-size: .7em;">'.$fechaHoraReg.'</span>
+					Invitado registrado a las: <span style="font-size: .7em;">'.$comodin.'</span>
 				</div>
 				');
 
@@ -49,7 +49,7 @@ switch ($opcion) {
 		break;
 	//Actualizar	
 	case 2:
-		$cs = $con -> query("UPDATE empleados SET asistencia = '1' WHERE md5ClaveUno = '31839b036f63806cba3f47b93af8ccb5'");
+		$cs = $con -> query("UPDATE empleados SET asistencia = '1', comodin = '$comodin' WHERE md5ClaveUno = '$nEmpleado'");
 		echo json_encode('correcto');
 
 		break;
