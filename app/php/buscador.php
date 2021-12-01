@@ -10,13 +10,17 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row" id="app">
             <div class="col-md-4 mx-auto">
                 <div class="text-center my-3">
                     <div class="card p-3 shadow fndoCard">
+                        <form @submit.prevent="alta">
+
+                        
                         <div class="card-body">
                             <img src="../img/LogoUTFV.svg" class="my-3" style="width: 100px; height: 100px; border-radius: 50%;">
                             <br>
+                            
 
 
 <?php
@@ -51,6 +55,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
         echo '
             <img src="'.$imgPersonal.'" class="img-fluid rounded" style="width: 150px;">
             </div>
+            <div class="form-group" v-html="datos"></div>
             <p>
                 <div class="p-2 rounded" style="text-align: left; background-color: rgba(186, 186, 186, 0.5);">
 
@@ -63,7 +68,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
                     <b>Cargo: </b><i>'.$puesto.'</i>
                 </div>
                 <br>
-                <button class="btn btn-success form-control my-4"><h3>Registro</h3></bustton>
+                
+                <button class="btn btn-success form-control">Registro</bustton>
             </p>
         ';
     }else{
@@ -80,7 +86,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
 ?>
 
 
-                
+                    </form>
                     </div>
                 </div>
             </div>
@@ -88,5 +94,46 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
     </div>
 
     <script src="../js/jquery.min.js"></script>
+    <script src="../js/sweetalert2.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                datos: '',
+                notificaEstado: '',
+                msgAlert: '',
+                nEmpleado: '<?php echo $md5ClaveUno;?>'
+            },
+            computed: {
+                validaAcceso() {
+                    this.notificaEstado = 'small alert alert-danger text-danger'
+                    this.msgAlert = 'Usuario sin registrar'
+                    return this.msgAlert
+                }
+            },
+            methods: {
+                alta () {
+                    axios.post('../verifica/alta.app', {
+                        opcion: 1,
+                        nEmpleado: this.nEmpleado              
+                    })
+                    .then(response => {
+                        if (response.data === 'correcto') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Usuario Activado!',
+                                showConfirmButton: false
+                            })
+                        }else{
+                            this.datos = response.data
+                            // console.log(response.data)
+                        }
+                    })
+                },
+            }
+        })
+    </script>
 </body>
 </html>
