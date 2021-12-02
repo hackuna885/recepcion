@@ -28,7 +28,7 @@ switch ($opcion) {
 				$comodin = $resul['comodin'];
 			}
 
-			if($asistencia == 1){
+			if($asistencia >= 1){
 
 				echo json_encode('
 				<div class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">
