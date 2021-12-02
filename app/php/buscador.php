@@ -27,6 +27,7 @@
 error_reporting(E_ALL ^ E_DEPRECATED);
 header("Content-Type: text/html; Charset=UTF-8");
 date_default_timezone_set('America/Mexico_City');
+session_start();
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -105,7 +106,7 @@ $fechaHoraReg = $fechaCap . ' ' . $horaCap;
         var app = new Vue({
             el: '#app',
             data: {
-                datos: [],
+                datos: '',
                 notificaEstado: '',
                 msgAlert: '',
                 nEmpleado: '<?php echo $md5ClaveUno;?>'
@@ -135,7 +136,8 @@ $fechaHoraReg = $fechaCap . ' ' . $horaCap;
 
                 listaDatos () {
                     axios.post('../verifica/alta.app', {
-                        opcion: 1
+                        opcion: 1,
+                        nEmpleado: this.nEmpleado 
                     })
                     .then(response => {
                         this.datos = response.data
