@@ -49,7 +49,7 @@ switch ($opcion) {
 		break;
 	//Actualizar	
 	case 2:
-		$cs = $con -> query("UPDATE empleados SET asistencia = '1', comodin = '$comodin' WHERE md5ClaveUno = '$nEmpleado'");
+		$cs = $con -> query("UPDATE empleados SET asistencia = 1, comodin = '$fechaHoraReg' WHERE md5ClaveUno = '$nEmpleado'");
 		echo json_encode('correcto');
 
 		break;
