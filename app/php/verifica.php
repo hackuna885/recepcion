@@ -10,6 +10,8 @@ $_POST = json_decode(file_get_contents("php://input"), true);
 // Entradas Form
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 $nEmpleado = (isset($_POST['nEmpleado'])) ? $_POST['nEmpleado'] : '';
+$nEmpleado = (isset($_GET['id'])) ? $_GET['id'] : $nEmpleado';
+
 
 $fechaCap = date('d-m-Y');
 $horaCap = date('g:i:s a');
