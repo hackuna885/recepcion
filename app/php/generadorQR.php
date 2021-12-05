@@ -26,7 +26,7 @@ $_POST = json_decode(file_get_contents("php://input"), true);
     //Generamos el QR dentro de la Ruta 'img/qr/'
 
     $con = new SQLite3("../data/data.db");
-    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '817' ");
+    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '814' ");
     while ($resul = $cs -> fetchArray()) {
         $claveUno = $resul['claveUno'];
         $nomCompleto = $resul['nomCompleto'];
@@ -82,8 +82,8 @@ $_POST = json_decode(file_get_contents("php://input"), true);
             
                     $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                    $mail->Username   = 'atencioncongreso8@utfv.edu.mx';                     // SMTP username
-                    $mail->Password   = '@123Atencion2021';                               // SMTP password
+                    $mail->Username   = 'eventos1@utfv.edu.mx';                     // SMTP username
+                    $mail->Password   = '@123Eventos';                               // SMTP password
                     $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
                     $mail->Port       = 587;                                    // TCP port to connect to
             
