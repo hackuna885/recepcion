@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,IAAK;EACD,MAAM,EAAE,IAAI;;AAGhB,IAAK;EACD,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,MAAM;EACnB,UAAU,EAAE,IAAI;;AAEpB,SAAS;EACL,gBAAgB,EAAE,uBAAuB",
+"sources": ["buscador.scss"],
+"names": [],
+"file": "buscador.css"
+}

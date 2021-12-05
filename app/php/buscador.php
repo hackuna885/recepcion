@@ -44,6 +44,7 @@ $fechaHoraReg = $fechaCap . ' ' . $horaCap;
         $nomCompleto = $resul['nomCompleto'];
         $depto = $resul['depto'];
         $puesto = $resul['puesto'];
+        $asistencia = $resul['asistencia'];
     };
 
     if (isset($id_data)) {
@@ -56,26 +57,17 @@ $fechaHoraReg = $fechaCap . ' ' . $horaCap;
             $imgPersonal = '../img/buscador/usr.svg';
         }
 
+        if ($asistencia == 0) {
+            $estadoBoton = '<button class="btn btn-success form-control">Registro</bustton>';
+        }else{
+            $estadoBoton = '<button class="btn btn-success form-control disabled">Registro</bustton>';
+        }
+
 
         echo '
             <img src="'.$imgPersonal.'" class="img-fluid rounded" style="width: 150px;">
             </div>
             <div class="form-group" v-html="datos"></div>
-            <p>
-                <div class="p-2 rounded" style="text-align: left; background-color: rgba(186, 186, 186, 0.5);">
-
-                    <b>Núm. Empleado: </b><i>'.$claveUno.'</i>
-                    <br>
-                    <b>Nombre: </b><i>'.$nomCompleto.'</i>
-                    <br>
-                    <b>Area: </b><i>'.$depto.'</i>
-                    <br>
-                    <b>Cargo: </b><i>'.$puesto.'</i>
-                </div>
-                <br>
-                
-                <button class="btn btn-success form-control">Registro</bustton>
-            </p>
         ';
     }else{
         echo '
@@ -126,7 +118,24 @@ $fechaHoraReg = $fechaCap . ' ' . $horaCap;
                                 title: '¡Invitado Registrado!',
                                 showConfirmButton: true
                             })
-                            this.datos = '<div class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">Invitado registrado a las: <span style="font-size: .7em;"><?php echo $fechaHoraReg;?></span></div>'; 
+                            this.datos = `
+                            <div class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">
+                                Invitado registrado a las: <span style="font-size: .7em;"><?php echo $fechaHoraReg;?></span>
+                            </div>
+                            <p>
+                            <div class="p-2 rounded" style="text-align: left; background-color: rgba(186, 186, 186, 0.5);">
+
+                                <b>Núm. Empleado: </b><i><?php echo $claveUno;?></i>
+                                <br>
+                                <b>Nombre: </b><i><?php echo $nomCompleto;?></i>
+                                <br>
+                                <b>Area: </b><i><?php echo $depto;?></i>
+                                <br>
+                                <b>Cargo: </b><i><?php echo $puesto;?></i>
+                            </div>
+                        </p>
+                        <div class="btn btn-success form-control disabled">Registro</div>
+                            `; 
                         }else{
                             this.datos = response.data
                             // console.log(response.data)
