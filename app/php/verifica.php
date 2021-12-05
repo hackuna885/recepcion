@@ -69,7 +69,7 @@ switch ($opcion) {
 						<b>Cargo: </b><i>'.$puesto.'</i>
 					</div>
 				</p>
-				<button class="btn btn-success form-control">Registro</button>
+				<button class="btn btn-success form-control disabled">Registro</button>
 				');
 			}
 
