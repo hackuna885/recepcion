@@ -26,10 +26,10 @@ $_POST = json_decode(file_get_contents("php://input"), true);
     //Generamos el QR dentro de la Ruta 'img/qr/'
 
     $con = new SQLite3("../data/data.db");
-    // $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '817' AND (correoUno NOT LIKE '')");
+    // $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '815' AND (correoUno NOT LIKE '')");
     
     // $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE id BETWEEN '227' AND '227' AND (correoUno NOT LIKE '')");
-    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE id BETWEEN '227' AND '227' AND (correoInt NOT LIKE '')");
+    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE id BETWEEN '810' AND '810' AND (correoInt NOT LIKE '')");
     while ($resul = $cs -> fetchArray()) {
         $idData = $resul['id'];
         $claveUno = $resul['claveUno'];
