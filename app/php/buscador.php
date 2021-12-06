@@ -57,13 +57,6 @@ $fechaHoraReg = $fechaCap . ' ' . $horaCap;
             $imgPersonal = '../img/buscador/usr.svg';
         }
 
-        if ($asistencia == 0) {
-            $estadoBoton = '<button class="btn btn-success form-control">Registro</bustton>';
-        }else{
-            $estadoBoton = '<button class="btn btn-success form-control disabled">Registro</bustton>';
-        }
-
-
         echo '
             <img src="'.$imgPersonal.'" class="img-fluid rounded" style="width: 150px;">
             </div>

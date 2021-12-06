@@ -26,10 +26,13 @@ $_POST = json_decode(file_get_contents("php://input"), true);
     //Generamos el QR dentro de la Ruta 'img/qr/'
 
     $con = new SQLite3("../data/data.db");
-    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '814' ");
+    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE id BETWEEN '227' AND '227' AND (correoUno NOT LIKE '')");
+    // $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE id BETWEEN '227' AND '227' AND (correoInt NOT LIKE '')");
     while ($resul = $cs -> fetchArray()) {
+        $idData = $resul['id'];
         $claveUno = $resul['claveUno'];
         $nomCompleto = $resul['nomCompleto'];
+        $correoUno = $resul['correoUno'];
         $correoInt = $resul['correoInt'];
 
         $md5ClaveUno = md5($claveUno);
@@ -91,8 +94,8 @@ $_POST = json_decode(file_get_contents("php://input"), true);
                     $mail->SMTPOptions = array( 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true ) );
             
                     //Recipients
-                    $mail->setFrom('atencioncongreso8@utfv.edu.mx');
-                    $mail->addAddress($correoInt);     //Correo de Salida
+                    $mail->setFrom('eventos1@utfv.edu.mx');
+                    $mail->addAddress($correoInt);     //Correo de Salida - Recuerda cambiar abajo en Correo:
                     // $mail->addBCC('oliver.velazquez@corsec.com.mx');
                     $mail->addAttachment($archivoPdf);  //Archivo Adjunto
             
@@ -114,7 +117,7 @@ $_POST = json_decode(file_get_contents("php://input"), true);
                     $mail->send();
     
     
-                    echo json_encode('correcto');			
+                    echo 'id: '.$idData.'- Nombre: '.$nomCompleto .' - Correo: '.$correoInt.' [✔] <br>';
             }
             
 
