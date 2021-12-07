@@ -26,10 +26,10 @@ $_POST = json_decode(file_get_contents("php://input"), true);
     //Generamos el QR dentro de la Ruta 'img/qr/'
 
     $con = new SQLite3("../data/data.db");
-    // $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '815' AND (correoUno NOT LIKE '')");
+    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE claveUno = '60002' AND (correoUno NOT LIKE '')");
     
     // $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE id BETWEEN '227' AND '227' AND (correoUno NOT LIKE '')");
-    $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE id BETWEEN '810' AND '810' AND (correoInt NOT LIKE '')");
+    // $cs = $con -> query("SELECT * FROM vEmpleados2021 WHERE id BETWEEN '261' AND '280' AND (correoInt NOT LIKE '')");
     while ($resul = $cs -> fetchArray()) {
         $idData = $resul['id'];
         $claveUno = $resul['claveUno'];
@@ -87,7 +87,7 @@ $_POST = json_decode(file_get_contents("php://input"), true);
             
                     $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                    $mail->Username   = 'eventos1@utfv.edu.mx';                     // SMTP username
+                    $mail->Username   = 'eventos4@utfv.edu.mx';                     // SMTP username
                     $mail->Password   = '@123Eventos';                               // SMTP password
                     $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
                     $mail->Port       = 587;                                    // TCP port to connect to
@@ -96,8 +96,8 @@ $_POST = json_decode(file_get_contents("php://input"), true);
                     $mail->SMTPOptions = array( 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true ) );
             
                     //Recipients
-                    $mail->setFrom('eventos1@utfv.edu.mx');
-                    $mail->addAddress($correoInt);     //Correo de Salida - Recuerda cambiar abajo en Correo:
+                    $mail->setFrom('eventos4@utfv.edu.mx');
+                    $mail->addAddress($correoUno);     //Correo de Salida - Recuerda cambiar abajo en Correo:
                     // $mail->addBCC('oliver.velazquez@corsec.com.mx');
                     $mail->addAttachment($archivoPdf);  //Archivo Adjunto
             
@@ -119,7 +119,7 @@ $_POST = json_decode(file_get_contents("php://input"), true);
                     $mail->send();
     
     
-                    echo 'id: '.$idData.'- Nombre: '.$nomCompleto .' - Correo: '.$correoInt.' [✔] <br>';
+                    echo 'id: '.$idData.'- Nombre: '.$nomCompleto .' - Correo: '.$correoUno.' [✔] <br>';
             }
             
 
